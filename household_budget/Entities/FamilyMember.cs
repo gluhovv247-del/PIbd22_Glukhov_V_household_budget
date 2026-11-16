@@ -16,11 +16,10 @@ public class FamilyMember
 
     public DateTime BirthDate { get; private set; }
 
-    public int BudgetItemId { get; private set; }
 
     public FamilyRole Role { get; private set; }
 
-    public static FamilyMember CreateFamilyMember(int id, string firstName, int familyId, DateTime birthDate, int budgetItemId, FamilyRole role)
+    public static FamilyMember CreateFamilyMember(int id, string firstName, int familyId, DateTime birthDate, FamilyRole role)
     {
         return new FamilyMember
         {
@@ -28,7 +27,6 @@ public class FamilyMember
             FirstName = firstName,
             FamilyId = familyId,
             BirthDate = birthDate,
-            BudgetItemId = budgetItemId,
             Role = role
         };
     }

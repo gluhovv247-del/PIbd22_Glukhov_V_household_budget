@@ -18,7 +18,7 @@ public class Operation
 
     public int FamilyMemberId { get; private set; }
 
-    public Operation CreateOperation(int id, DateTime createTime, int operationCategoryId, OperationImportance importance, int familyMemberId)
+    public static Operation CreateOperation(int id, DateTime createTime, int operationCategoryId, OperationImportance importance, int familyMemberId)
     {
         return new Operation
         {

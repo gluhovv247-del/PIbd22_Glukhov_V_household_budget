@@ -17,7 +17,7 @@ public class FamilyMemberRepository : IFamilyMemberRepository
 
     public FamilyMember ReadFamilyMemberById(int id)
     {
-        return FamilyMember.CreateFamilyMember(0, string.Empty, 0, DateTime.Now, 0, 0);
+        return FamilyMember.CreateFamilyMember(0, string.Empty, 0, DateTime.Now, 0);
     }
 
     public IEnumerable<FamilyMember> ReadFamilyMembers()
