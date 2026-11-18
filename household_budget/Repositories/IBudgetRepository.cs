@@ -12,7 +12,6 @@ public interface IBudgetRepository
         DateTime? endDateFrom, DateTime? endDateTo,
         int? familyId = null
         );
-    Budget ReadBudgetById(int id);
     void CreateBudget(Budget budget);
     void DeleteBudget(int id);
 }

@@ -59,19 +59,5 @@ namespace household_budget.Forms.DataForms
         private void LoadList() => dataGridView.DataSource =
             _budgetForecastRepository.ReadBudgetForecasts(null, null, null, null);
 
-        private bool TryGetIdentifierFromSelectedRow(out int id)
-        {
-            id = 0;
-            if (dataGridView.SelectedRows.Count < 1)
-            {
-                MessageBox.Show("Нет выбранной записи", "Ошибка",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            id =
-            Convert.ToInt32(dataGridView.SelectedRows[0].Cells["Id"].Value);
-            return true;
-
-        }
     }
 }
