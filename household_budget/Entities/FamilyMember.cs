@@ -24,7 +24,7 @@ public class FamilyMember
         return new FamilyMember
         {
             Id = id,
-            FirstName = firstName,
+            FirstName = firstName ?? string.Empty,
             FamilyId = familyId,
             BirthDate = birthDate,
             Role = role

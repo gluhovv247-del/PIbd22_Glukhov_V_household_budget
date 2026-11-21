@@ -19,8 +19,8 @@ public class OperationCategory
     {
         return new OperationCategory {
             Id = id,
-            Name = name,
-            Type = type,
+            Name = name ?? string.Empty,
+            Type = type ?? string.Empty,
             Description = description
         };
     }
