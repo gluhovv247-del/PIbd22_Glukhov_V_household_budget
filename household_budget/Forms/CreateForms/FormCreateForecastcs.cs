@@ -42,8 +42,8 @@ namespace household_budget.Forms.CreateForms
                 }
                 _budgetForecastRepository.CreateBudgetForecast(BudgetForecast.CreateBudget(
                 0,
-                dateTimePickerStartDate.Value,
-                dateTimePickerEndDate.Value,
+                 DateTime.SpecifyKind(dateTimePickerStartDate.Value, DateTimeKind.Utc),
+                DateTime.SpecifyKind(dateTimePickerEndDate.Value, DateTimeKind.Utc),
                 0,
                 0,
                 (int)comboBoxFamily.SelectedValue!));

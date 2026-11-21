@@ -11,7 +11,7 @@ public class BudgetReport
     [Key]
     public int Id { get; private set; }
 
-    [Column("planned_income")]
+    [Column("total_income")]
     public decimal TotalIncome { get; private set; }
 
     [Column("total_expense")]

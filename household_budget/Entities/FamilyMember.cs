@@ -15,16 +15,16 @@ public class FamilyMember
     [Column("first_name")]
     [MaxLength(50)]
     [Required]
-    public string FirstName { get; private set; } = string.Empty;
+    public string FirstName { get; internal set; } = string.Empty;
 
     [ForeignKey(nameof(Family))]
     public int FamilyId { get; private set; }
 
     [Column("birth_date")]
-    public DateTime BirthDate { get; private set; }
+    public DateTime BirthDate { get; internal set; }
 
     [Column("role")]
-    public FamilyRole Role { get; private set; }
+    public FamilyRole Role { get; internal set; }
     public List<BudgetItem>? BudgetItems { get; internal set; }
     public List<Operation>? Operations { get; internal set; }
 

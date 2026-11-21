@@ -13,13 +13,13 @@ public class OperationCategory
 
     [Required]
     [Column("name")]
-    public string Name { get; private set; } = string.Empty;
+    public string Name { get; internal set; } = string.Empty;
 
     [Column("type")]
-    public string Type { get; private set; } = string.Empty;
+    public string Type { get; internal set; } = string.Empty;
 
     [Column("description")]
-    public string? Description { get; private set; }
+    public string? Description { get; internal set; }
     public List<BudgetItem>? BudgetItems { get; internal set; }
     public List<Operation>? Operations { get; internal set; }
 
