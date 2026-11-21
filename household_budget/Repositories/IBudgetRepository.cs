@@ -12,6 +12,6 @@ public interface IBudgetRepository
         DateTime? endDateFrom, DateTime? endDateTo,
         int? familyId = null
         );
-    void CreateBudget(Budget budget);
+    void CreateBudget(Budget budget, List<BudgetItem> budgetItems);
     void DeleteBudget(int id);
 }

@@ -42,7 +42,7 @@ namespace household_budget.Forms.CreateForms
                 }
                 _budgetForecastRepository.CreateBudgetForecast(BudgetForecast.CreateBudget(
                 0,
-                 DateTime.SpecifyKind(dateTimePickerStartDate.Value, DateTimeKind.Utc),
+                DateTime.SpecifyKind(dateTimePickerStartDate.Value, DateTimeKind.Utc),
                 DateTime.SpecifyKind(dateTimePickerEndDate.Value, DateTimeKind.Utc),
                 0,
                 0,

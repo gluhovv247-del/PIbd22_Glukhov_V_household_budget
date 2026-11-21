@@ -1,4 +1,8 @@
-﻿using household_budget.Entities;
+﻿using household_budget.DB_Configurations;
+using household_budget.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,25 +11,31 @@ namespace household_budget.Repositories.Implementations;
 
 public class BudgetItemRepository : IBudgetItemRepository
 {
-    public void CreateBudgetItem(BudgetItem budgetItem)
-    {
-    }
+    private readonly DataContext _context;
 
-    public void DeleteBudgetItem(int id)
-    {
-    }
+    private readonly ILogger<IBudgetItemRepository> _logger;
 
-    public BudgetItem ReadBudgetItemById(int id)
+    public BudgetItemRepository(ILogger<IBudgetItemRepository> logger, DataContext context)
     {
-        return BudgetItem.CreateBudgetItem(0, 0, 0, 0, 0);
+        _logger = logger;
+        _context = context;
     }
 
     public IEnumerable<BudgetItem> ReadBudgetItems(int? BudgetId = null, int? OperationCategoryId = null, int? FamilyMemberId = null)
     {
-        return [];
-    }
-
-    public void UpdateBudgetItem(BudgetItem budgetItem)
-    {
+        _logger.LogInformation("Получение всех объектов");
+        
+        try
+        {
+            var budgetItems = _context.BudgetItems.AsNoTracking().ToList();
+            _logger.LogDebug("Объект: {json}",
+            JsonConvert.SerializeObject(budgetItems));
+            return budgetItems;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Ошибка при чтении объектов");
+            throw;
+        }
     }
 }

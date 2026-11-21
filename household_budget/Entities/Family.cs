@@ -23,7 +23,7 @@ public class Family{
         return new Family
         {
             Id = id,
-            Surname = surname
+            Surname = surname ?? string.Empty
         };
 
     }

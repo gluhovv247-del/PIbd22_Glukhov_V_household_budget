@@ -11,8 +11,4 @@ public interface IBudgetItemRepository
         int? BudgetId = null, int? OperationCategoryId = null,
         int? FamilyMemberId = null
         );
-    BudgetItem ReadBudgetItemById (int id);
-    void CreateBudgetItem(BudgetItem budgetItem);
-    void UpdateBudgetItem(BudgetItem budgetItem);
-    void DeleteBudgetItem(int id);
 }

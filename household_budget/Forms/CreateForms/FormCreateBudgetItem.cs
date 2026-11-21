@@ -14,43 +14,14 @@ namespace household_budget.Forms.CreateForms
     {
         private IBudgetItemRepository _budgetItemRepository;
 
-        private IBudgetRepository _budgetRepository;
-
         private IOperationCategoryRepository _operationCategoryRepository;
 
         private IFamilyMemberRepository _familyMemberRepository;
 
-        private int? _budgetItemId;
+        public BudgetItem? CreatedBudgetItem { get; private set; }
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(
-            DesignerSerializationVisibility.Hidden)]
-        public int Id
-        {
-            set
-            {
-                try
-                {
-                    var budgetItem =
-                    _budgetItemRepository.ReadBudgetItemById(value);
-                    if (budgetItem == null)
-                    {
-                        throw new
-                            InvalidDataException(nameof(budgetItem));
-                    }
-                    textBoxAmount.Text = budgetItem.PlannedAmount.ToString();
-                    comboBoxBudget.SelectedValue = budgetItem.BudgetId;
-                    comboBoxCategoryOperation.SelectedValue = budgetItem.OperationCategoryId;
-                    comboBoxFamilyMember.SelectedValue = budgetItem.FamilyMemberId;
-                    _budgetItemId = value;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка при получении данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-        }
+
+        private int? _budgetItemId;
 
         public FormCreateBudgetItem(
             IBudgetItemRepository budgetItemRepository,
@@ -61,14 +32,8 @@ namespace household_budget.Forms.CreateForms
         {
             InitializeComponent();
             _budgetItemRepository = budgetItemRepository ?? throw new ArgumentNullException(nameof(budgetItemRepository));
-            _budgetRepository = budgetRepository ?? throw new ArgumentNullException(nameof(budgetRepository));
             _operationCategoryRepository = operationCategoryRepository ?? throw new ArgumentNullException(nameof(operationCategoryRepository));
             _familyMemberRepository = familyMemberRepository ?? throw new ArgumentNullException(nameof(familyMemberRepository));
-
-            comboBoxBudget.DataSource =
-                budgetRepository.ReadBudgets(null, null, null, null);
-            comboBoxBudget.DisplayMember = "Id";
-            comboBoxBudget.ValueMember = "Id";
 
             comboBoxCategoryOperation.DataSource =
                 operationCategoryRepository.ReadOperationCategories();
@@ -86,20 +51,22 @@ namespace household_budget.Forms.CreateForms
             try
             {
                 if (string.IsNullOrWhiteSpace(textBoxAmount.Text)
-                    || comboBoxBudget.SelectedIndex < 0
                     || comboBoxCategoryOperation.SelectedIndex < 0
                     || comboBoxFamilyMember.SelectedIndex < 0)
                 {
                     throw new Exception("Имеются незаполненные поля");
                 }
-                if (_budgetItemId.HasValue)
+                if (!decimal.TryParse(textBoxAmount.Text, out decimal amount))
                 {
-                    _budgetItemRepository.UpdateBudgetItem(CreateBudgetItem(_budgetItemId.Value));
+                    throw new Exception("Некорректная сумма");
                 }
-                else
-                {
-                    _budgetItemRepository.CreateBudgetItem(CreateBudgetItem(0));
-                }
+                CreatedBudgetItem = BudgetItem.CreateBudgetItem(
+                    _budgetItemId ?? 0,
+                    amount,
+                    0,
+                    (int)comboBoxCategoryOperation.SelectedValue!,
+                    (int)comboBoxFamilyMember.SelectedValue!
+                );
                 Close();
             }
             catch (Exception ex)
@@ -108,12 +75,6 @@ namespace household_budget.Forms.CreateForms
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private BudgetItem CreateBudgetItem(int id) => BudgetItem.CreateBudgetItem(id,
-            Convert.ToDecimal(textBoxAmount.Text),
-            (int)comboBoxBudget.SelectedValue!,
-            (int)comboBoxCategoryOperation.SelectedValue!,
-            (int)comboBoxFamilyMember.SelectedValue!);
 
         private void buttonCancel_Click(object sender, EventArgs e) => Close();
     }

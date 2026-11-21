@@ -12,19 +12,19 @@ public class BudgetItem
     public int Id { get; private set; }
 
     [Column("planned_amount")]
-    public decimal PlannedAmount { get; private set; }
+    public decimal PlannedAmount { get; internal set; }
 
     [ForeignKey(nameof(Budget))]
     [Column("budget_id")]
-    public int BudgetId { get; private set; }
+    public int BudgetId { get; internal set; }
 
     [ForeignKey(nameof(OperationCategory))]
     [Column("operation_category_id")]
-    public int OperationCategoryId { get; private set; }
+    public int OperationCategoryId { get; internal set; }
 
     [ForeignKey(nameof(FamilyMember))]
     [Column("family_member_id")]
-    public int FamilyMemberId { get; private set; }
+    public int FamilyMemberId { get; internal set; }
 
     public static BudgetItem CreateBudgetItem(int id, decimal plannedAmount, int budgetId, int operationCategoryId, int familyMemberId)
     {
