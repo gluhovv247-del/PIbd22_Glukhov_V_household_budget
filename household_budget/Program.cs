@@ -1,12 +1,13 @@
+using household_budget.DB_Configurations;
 using household_budget.Forms;
 using household_budget.Repositories;
 using household_budget.Repositories.Implementations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Unity.Microsoft.Logging;
 using Serilog;
 using Unity;
 using Unity.Lifetime;
+using Unity.Microsoft.Logging;
 
 namespace household_budget
 {
@@ -29,6 +30,8 @@ namespace household_budget
             var container = new UnityContainer();
             container.AddExtension(new
                 LoggingExtension(CreateLoggerFactory()));
+
+            container.RegisterType<DataContext>(new TransientLifetimeManager());
 
             container.RegisterType<IBudgetForecastRepository,
                 BudgetForecastRepository> (new TransientLifetimeManager());

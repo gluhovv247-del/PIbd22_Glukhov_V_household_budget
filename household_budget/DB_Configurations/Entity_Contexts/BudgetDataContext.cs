@@ -12,12 +12,13 @@ public class BudgetDataContext : IEntityTypeConfiguration<Budget>
 {
     public void Configure(EntityTypeBuilder<Budget> builder)
     {
-        builder.ToTable("budgets", t => 
-        t.HasCheckConstraint(
-            "CK_Budget_EndDate_After_StartDate", 
-            "[end_date] > [start_date]"
-            )
-        );
+        builder.ToTable(t =>
+        {
+            t.HasCheckConstraint(
+                "CK_Budget_EndDate_After_StartDate",
+                "\"end_date\" > \"start_date\""
+            );
+        });
 
         builder.HasOne(b => b.Family)
               .WithMany(f => f.Budgets)     

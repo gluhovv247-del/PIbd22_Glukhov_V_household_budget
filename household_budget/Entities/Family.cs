@@ -13,7 +13,7 @@ public class Family{
     [Column("surname")]
     [Required]
     [MaxLength(50)]
-    public string Surname { get; private set; } = string.Empty;
+    public string Surname { get; internal set; } = string.Empty;
     public List<Budget>? Budgets { get; private set; }
     public List<BudgetForecast>? BudgetForecasts { get; internal set; }
     public List<FamilyMember>? FamilyMembers { get; internal set; }
@@ -25,6 +25,10 @@ public class Family{
             Id = id,
             Surname = surname ?? string.Empty
         };
+
+    }
+    public Family()
+    {
 
     }
 

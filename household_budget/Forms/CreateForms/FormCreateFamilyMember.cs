@@ -96,7 +96,7 @@ namespace household_budget.Forms.CreateForms
         private FamilyMember CreateFamilyMember(int id) => FamilyMember.CreateFamilyMember(id,
             textBoxFirstName.Text,
             (int)comboBoxFamily.SelectedValue!,
-            dateTimePickerBirthDate.Value,
+            DateTime.SpecifyKind(dateTimePickerBirthDate.Value, DateTimeKind.Utc),
             (FamilyRole)comboBoxRole.SelectedItem!);
 
         private void buttonCancel_Click(object sender, EventArgs e) => Close();

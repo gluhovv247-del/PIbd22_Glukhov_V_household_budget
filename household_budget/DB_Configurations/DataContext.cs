@@ -1,9 +1,5 @@
 ﻿using household_budget.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace household_budget.DB_Configurations;
 
