@@ -44,6 +44,11 @@ public class OperationRepository : IOperationRepository
         {
             var operation = _context.Operations.Find(id);
 
+            if (operation == null)
+            {
+                throw new Exception("Операция не найдена");
+            }
+
             _context.Operations.Remove(operation);
             _context.SaveChanges();
         }

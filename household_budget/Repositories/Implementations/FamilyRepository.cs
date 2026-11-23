@@ -46,6 +46,17 @@ public class FamilyRepository : IFamilyRepository
         try
         {
             var family = _context.Families.Find(id);
+
+            if(family == null)
+            {
+                throw new Exception("Семья не найдена");
+            }
+
+            var hasMembers = _context.FamilyMembers.Any(fm => fm.FamilyId == id);
+            if (hasMembers)
+            {
+                throw new Exception("Семья не может быть удалена, пока она содержит учатников");
+            }
             _context.Families.Remove(family);
             _context.SaveChanges();
         }
@@ -81,6 +92,12 @@ public class FamilyRepository : IFamilyRepository
         try
         {
             var family = _context.Families.Find(id);
+
+            if (family == null)
+            {
+                throw new Exception("Семья не найдена");
+            }
+
             _logger.LogDebug("Найденный объект: {json}",
                 JsonConvert.SerializeObject(family));
             return family;
@@ -100,6 +117,12 @@ public class FamilyRepository : IFamilyRepository
         try
         {
             var existingFamily = _context.Families.Find(family.Id);
+
+            if (existingFamily == null)
+            {
+                throw new Exception("Семья не найдена");
+            }
+
             existingFamily.Surname = family.Surname;
             _context.SaveChanges();
         }

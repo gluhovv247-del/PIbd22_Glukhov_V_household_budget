@@ -41,6 +41,11 @@ public class BudgetRepository : IBudgetRepository
                 budgetItem.BudgetId = budget.Id;
             }
 
+            if(budget.EndDate <= budget.StartDate)
+            {
+                throw new Exception("дата окончания должна быть позже даты начала");
+            }
+
             _context.BudgetItems.AddRange(budgetItems);
             _context.SaveChanges();
 
@@ -62,6 +67,12 @@ public class BudgetRepository : IBudgetRepository
         try
         {
             var budget = _context.Budgets.Find(id);
+
+            if (budget == null)
+            {
+                throw new Exception("Семья не найдена");
+            }
+
             _context.Budgets.Remove(budget);
             _context.SaveChanges();
         }

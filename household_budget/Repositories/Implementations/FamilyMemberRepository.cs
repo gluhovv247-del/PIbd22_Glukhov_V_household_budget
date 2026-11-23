@@ -50,7 +50,18 @@ public class FamilyMemberRepository : IFamilyMemberRepository
             var familyMember = _context.FamilyMembers.Find(id);
 
             if (familyMember == null)
-                return;
+            {
+                throw new Exception("Участник семьи не найден");
+            }
+
+            var hasOperations = _context.Operations.Any(o => o.FamilyMemberId == id);
+            var hasBudgetItems = _context.BudgetItems.Any(o => o.FamilyMemberId == id);
+
+            if (hasOperations || hasBudgetItems)
+            {
+                throw new Exception("Категория не может быть удалена, пока ей принадлежат какие то операции или статьи бюджета");
+            }
+
 
             _context.FamilyMembers.Remove(familyMember);
             _context.SaveChanges();
@@ -70,6 +81,12 @@ public class FamilyMemberRepository : IFamilyMemberRepository
         try
         {
             var familyMember = _context.FamilyMembers.Find(id);
+
+
+            if (familyMember == null)
+            {
+                throw new Exception("Участник семьи не найден");
+            }
 
             _logger.LogDebug("Найденный объект: {json}",
                 JsonConvert.SerializeObject(familyMember));
@@ -116,8 +133,11 @@ public class FamilyMemberRepository : IFamilyMemberRepository
             var existingFamilyMember =
                 _context.FamilyMembers.Find(family.Id);
 
+
             if (existingFamilyMember == null)
-                return;
+            {
+                throw new Exception("Участник семьи не найден");
+            }
 
             existingFamilyMember.FirstName = family.FirstName;
             existingFamilyMember.BirthDate = family.BirthDate;
