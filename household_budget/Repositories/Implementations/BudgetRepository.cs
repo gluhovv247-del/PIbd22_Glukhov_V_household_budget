@@ -7,7 +7,8 @@ namespace household_budget.Repositories.Implementations;
 
 public class BudgetRepository : IBudgetRepository
 {
-    public void CreateBudget(Budget budget)
+
+    public void CreateBudget(Budget budget, List<BudgetItem> budgetItems)
     {
     }
 

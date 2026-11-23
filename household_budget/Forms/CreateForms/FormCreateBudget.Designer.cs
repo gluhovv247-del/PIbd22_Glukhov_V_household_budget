@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dataGridViewBudgetItem = new DataGridView();
             dateTimePickerStartDate = new DateTimePicker();
             labelStartDate = new Label();
             dateTimePickerEndDate = new DateTimePicker();
@@ -36,7 +37,24 @@
             buttonCancel = new Button();
             comboBoxFamily = new ComboBox();
             labelFamily = new Label();
+            labelBudgetItems = new Label();
+            buttonCreate = new Button();
+            buttonDelete = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBudgetItem).BeginInit();
             SuspendLayout();
+            // 
+            // dataGridViewBudgetItem
+            // 
+            dataGridViewBudgetItem.AllowUserToAddRows = false;
+            dataGridViewBudgetItem.AllowUserToDeleteRows = false;
+            dataGridViewBudgetItem.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewBudgetItem.Location = new Point(175, 218);
+            dataGridViewBudgetItem.Name = "dataGridViewBudgetItem";
+            dataGridViewBudgetItem.RowHeadersVisible = false;
+            dataGridViewBudgetItem.RowHeadersWidth = 51;
+            dataGridViewBudgetItem.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewBudgetItem.Size = new Size(230, 158);
+            dataGridViewBudgetItem.TabIndex = 8;
             // 
             // dateTimePickerStartDate
             // 
@@ -72,7 +90,7 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(115, 302);
+            buttonSave.Location = new Point(112, 395);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(94, 29);
             buttonSave.TabIndex = 4;
@@ -82,7 +100,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(302, 302);
+            buttonCancel.Location = new Point(311, 395);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(94, 29);
             buttonCancel.TabIndex = 5;
@@ -107,11 +125,44 @@
             labelFamily.TabIndex = 7;
             labelFamily.Text = "Семья";
             // 
+            // labelBudgetItems
+            // 
+            labelBudgetItems.AutoSize = true;
+            labelBudgetItems.Location = new Point(50, 259);
+            labelBudgetItems.Name = "labelBudgetItems";
+            labelBudgetItems.Size = new Size(121, 20);
+            labelBudgetItems.TabIndex = 9;
+            labelBudgetItems.Text = "Статьи бюджета";
+            // 
+            // buttonCreate
+            // 
+            buttonCreate.Location = new Point(426, 235);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(94, 29);
+            buttonCreate.TabIndex = 10;
+            buttonCreate.Text = "Создать";
+            buttonCreate.UseVisualStyleBackColor = true;
+            buttonCreate.Click += buttonCreate_Click;
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.Location = new Point(426, 297);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(94, 29);
+            buttonDelete.TabIndex = 11;
+            buttonDelete.Text = "Удалить";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
+            // 
             // FormCreateBudget
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(532, 453);
+            Controls.Add(buttonDelete);
+            Controls.Add(buttonCreate);
+            Controls.Add(labelBudgetItems);
+            Controls.Add(dataGridViewBudgetItem);
             Controls.Add(labelFamily);
             Controls.Add(comboBoxFamily);
             Controls.Add(buttonCancel);
@@ -122,6 +173,8 @@
             Controls.Add(dateTimePickerStartDate);
             Name = "FormCreateBudget";
             Text = "Бюджет";
+            Load += FormCreateBudget_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBudgetItem).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -136,5 +189,9 @@
         private Button buttonCancel;
         private ComboBox comboBoxFamily;
         private Label labelFamily;
+        private DataGridView dataGridViewBudgetItem;
+        private Label labelBudgetItems;
+        private Button buttonCreate;
+        private Button buttonDelete;
     }
 }
