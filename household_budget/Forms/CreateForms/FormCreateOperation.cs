@@ -60,6 +60,7 @@ namespace household_budget.Forms.CreateForms
                     throw new Exception("Имеются незаполненные поля");
                 }
                 _operationRepository.CreateOperation(CreateOperation(0));
+                Close();
             }
             catch (Exception ex)
             {
@@ -76,10 +77,10 @@ namespace household_budget.Forms.CreateForms
             }
             return Operation.CreateOperation(
                 id,
-                DateTime.Now,
-                (int)comboBoxCategoryOperation.SelectedIndex,
+                DateTime.UtcNow,
+                (int)comboBoxCategoryOperation.SelectedValue,
                 importance,
-                (int)comboBoxFamilyMember.SelectedIndex
+                (int)comboBoxFamilyMember.SelectedValue
             );
         }
 

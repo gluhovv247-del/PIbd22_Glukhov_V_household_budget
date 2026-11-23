@@ -91,6 +91,5 @@
         private Label labelSurname;
         private TextBox textBoxSurname;
         private Button buttonSave;
-        private Button buttonCancel;
     }
 }

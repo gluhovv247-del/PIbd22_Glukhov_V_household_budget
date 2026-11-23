@@ -46,7 +46,7 @@ namespace household_budget.Forms.CreateForms
                 0,
                 0,
                 0,
-                DateTime.Now,
+                DateTime.UtcNow,
                 (int)comboBoxBudget.SelectedValue!));
                 Close();
             }

@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace household_budget.Entities;
 
 public class OperationCategory
 {
-
+    [Key]
     public int Id { get; private set; }
 
-    public string Name { get; private set; } = string.Empty;
+    [Required]
+    [Column("name")]
+    public string Name { get; internal set; } = string.Empty;
 
-    public string Type { get; private set; } = string.Empty;
+    [Column("type")]
+    public string Type { get; internal set; } = string.Empty;
 
-    public string? Description { get; private set; }
+    [Column("description")]
+    public string? Description { get; internal set; }
+    public List<BudgetItem>? BudgetItems { get; internal set; }
+    public List<Operation>? Operations { get; internal set; }
 
     public static OperationCategory CreateOperationCategory(int id, string name, string type, string? description)
     {

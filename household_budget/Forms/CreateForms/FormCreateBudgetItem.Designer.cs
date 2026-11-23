@@ -30,8 +30,6 @@
         {
             labelAmount = new Label();
             textBoxAmount = new TextBox();
-            comboBoxBudget = new ComboBox();
-            labelBudget = new Label();
             labelCategory = new Label();
             labelFamilyMember = new Label();
             comboBoxCategoryOperation = new ComboBox();
@@ -56,27 +54,10 @@
             textBoxAmount.Size = new Size(198, 27);
             textBoxAmount.TabIndex = 1;
             // 
-            // comboBoxBudget
-            // 
-            comboBoxBudget.FormattingEnabled = true;
-            comboBoxBudget.Location = new Point(269, 134);
-            comboBoxBudget.Name = "comboBoxBudget";
-            comboBoxBudget.Size = new Size(198, 28);
-            comboBoxBudget.TabIndex = 2;
-            // 
-            // labelBudget
-            // 
-            labelBudget.AutoSize = true;
-            labelBudget.Location = new Point(85, 142);
-            labelBudget.Name = "labelBudget";
-            labelBudget.Size = new Size(63, 20);
-            labelBudget.TabIndex = 3;
-            labelBudget.Text = "Бюджет";
-            // 
             // labelCategory
             // 
             labelCategory.AutoSize = true;
-            labelCategory.Location = new Point(85, 202);
+            labelCategory.Location = new Point(85, 141);
             labelCategory.Name = "labelCategory";
             labelCategory.Size = new Size(81, 20);
             labelCategory.TabIndex = 4;
@@ -85,7 +66,7 @@
             // labelFamilyMember
             // 
             labelFamilyMember.AutoSize = true;
-            labelFamilyMember.Location = new Point(85, 258);
+            labelFamilyMember.Location = new Point(85, 213);
             labelFamilyMember.Name = "labelFamilyMember";
             labelFamilyMember.Size = new Size(91, 20);
             labelFamilyMember.TabIndex = 5;
@@ -94,7 +75,7 @@
             // comboBoxCategoryOperation
             // 
             comboBoxCategoryOperation.FormattingEnabled = true;
-            comboBoxCategoryOperation.Location = new Point(269, 202);
+            comboBoxCategoryOperation.Location = new Point(269, 133);
             comboBoxCategoryOperation.Name = "comboBoxCategoryOperation";
             comboBoxCategoryOperation.Size = new Size(198, 28);
             comboBoxCategoryOperation.TabIndex = 6;
@@ -102,7 +83,7 @@
             // comboBoxFamilyMember
             // 
             comboBoxFamilyMember.FormattingEnabled = true;
-            comboBoxFamilyMember.Location = new Point(269, 258);
+            comboBoxFamilyMember.Location = new Point(269, 205);
             comboBoxFamilyMember.Name = "comboBoxFamilyMember";
             comboBoxFamilyMember.Size = new Size(198, 28);
             comboBoxFamilyMember.TabIndex = 7;
@@ -138,8 +119,6 @@
             Controls.Add(comboBoxCategoryOperation);
             Controls.Add(labelFamilyMember);
             Controls.Add(labelCategory);
-            Controls.Add(labelBudget);
-            Controls.Add(comboBoxBudget);
             Controls.Add(textBoxAmount);
             Controls.Add(labelAmount);
             Name = "FormCreateBudgetItem";
@@ -152,8 +131,6 @@
 
         private Label labelAmount;
         private TextBox textBoxAmount;
-        private ComboBox comboBoxBudget;
-        private Label labelBudget;
         private Label labelCategory;
         private Label labelFamilyMember;
         private ComboBox comboBoxCategoryOperation;
