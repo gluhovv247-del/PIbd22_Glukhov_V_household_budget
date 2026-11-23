@@ -42,10 +42,17 @@ namespace household_budget.Forms
                 {
                     throw new Exception("Имеются незаполненные поля");
                 }
+                var startDate = DateTime.SpecifyKind(dateTimePickerStartDate.Value, DateTimeKind.Utc);
+                var endDate = DateTime.SpecifyKind(dateTimePickerEndDate.Value, DateTimeKind.Utc);
+
+                if (startDate >= endDate)
+                {
+                    throw new Exception("Дата окончания должна быть позже даты начала");
+                }
                 _budgetRepository.CreateBudget(Budget.CreateBudget(
                 0,
-                DateTime.SpecifyKind(dateTimePickerStartDate.Value, DateTimeKind.Utc),
-                DateTime.SpecifyKind(dateTimePickerEndDate.Value, DateTimeKind.Utc),
+                startDate,
+                endDate,
                 (int)comboBoxFamily.SelectedValue!), _budgetItems.ToList());
                 Close();
             }

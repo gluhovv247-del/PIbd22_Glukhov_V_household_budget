@@ -50,7 +50,16 @@ public class OperationCategoryRepository : IOperationCategoryRepository
             var operationCategory = _context.OperationCategories.Find(id);
 
             if (operationCategory == null)
-                return;
+            {
+                throw new Exception("Категория не найдена");
+            }
+
+            var hasOperations = _context.Operations.Any(o => o.OperationCategoryId == id);
+            var hasBudgetItems = _context.BudgetItems.Any(b => b.OperationCategoryId == id);
+            if (hasOperations || hasBudgetItems)
+            {
+                throw new Exception("Категория не может быть удалена, пока ей принадлежат какие то операции или статьи бюджета");
+            }
 
             _context.OperationCategories.Remove(operationCategory);
             _context.SaveChanges();
@@ -94,6 +103,11 @@ public class OperationCategoryRepository : IOperationCategoryRepository
             var operationCategory = _context.OperationCategories
                 .Find(id);
 
+            if (operationCategory == null)
+            {
+                throw new Exception("Категория не найдена");
+            }
+
             _logger.LogDebug("Найденный объект: {json}",
                 JsonConvert.SerializeObject(operationCategory));
 
@@ -118,7 +132,9 @@ public class OperationCategoryRepository : IOperationCategoryRepository
                 .Find(operationCategory.Id);
 
             if (existingOperationCategory == null)
-                return;
+            {
+                throw new Exception("Категория не найдена");
+            }
 
             existingOperationCategory.Name = operationCategory.Name;
             existingOperationCategory.Description = operationCategory.Description;
